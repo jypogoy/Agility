@@ -1,0 +1,99 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<?php use Phalcon\Tag; ?>
+
+<div class="ui fixed menu">
+    <div class="ui container">
+		<a href="#" class="header item">
+			<img class="logo" src="/Agility/public/img/agile.jpg">
+			Agility
+		</a>
+		<a href="#" class="item">Home </a>
+		<a href="#" class="item">Inbox <div class="ui lightgrey tiny label">10</div></a>
+		<a href="#" class="item">My Tasks <div class="ui lightgrey tiny label">5</div></a>
+		<a href="#" class="item">Queued <div class="ui lightgrey tiny label">6</div></a>
+		<a href="#" class="item">Involved <div class="ui lightgrey tiny label">3</div></a>
+		<div class="ui simple dropdown item">
+			Manage <i class="dropdown icon"></i>
+			<div class="menu">
+				<a class="item" href="#">Projects</a>
+				<a class="item" href="#">Resources</a>
+				<div class="divider"></div>
+				<div class="header">Header Item</div>
+				<div class="item">
+					<i class="dropdown icon"></i>
+					Sub Menu
+					<div class="menu">
+						<a class="item" href="#">Link Item</a>
+						<a class="item" href="#">Link Item</a>
+					</div>
+				</div>
+				<a class="item" href="#">Link Item</a>
+			</div>
+		</div>
+    </div>    
+</div>
+
+<div class="page-header" style="margin-top: 8%;">
+    <h1>
+        Projects
+    </h1>    
+    <i class="plus icon"></i><?php echo $this->tag->linkTo(["projects/new", "Create Project"]) ?>
+</div>
+
+<?php echo $this->getContent(); ?>
+
+<div class="row" style="margin-top: 20px;">
+    
+    <table class="ui celled striped table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Starts</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($page->items as $project): ?>
+            <tr>
+                <td><?php echo $project->id ?></td>
+                <td><?php echo $project->name ?></td>
+                <td><?php echo $project->description ?></td>
+                <td><?php echo $project->starts ?></td>
+                <td><?php echo $project->created ?></td>
+                <td><?php echo $project->updated ?></td>
+
+                <td><?php echo $this->tag->linkTo(["projects/edit/" . $project->id, "Edit"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["projects/delete/" . $project->id, "Delete"]); ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-sm-1">
+        <p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
+            <?php echo $page->current, "/", $page->total_pages ?>
+        </p>
+    </div>
+    <div class="col-sm-11">
+        <nav>
+            <ul class="pagination">
+                <li><?php echo $this->tag->linkTo("projects/search", "First") ?></li>
+                <li><?php echo $this->tag->linkTo("projects/search?page=" . $page->before, "Previous") ?></li>
+                <li><?php echo $this->tag->linkTo("projects/search?page=" . $page->next, "Next") ?></li>
+                <li><?php echo $this->tag->linkTo("projects/search?page=" . $page->last, "Last") ?></li>
+            </ul>
+        </nav>
+    </div>
+</div>

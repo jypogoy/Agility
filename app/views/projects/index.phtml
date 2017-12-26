@@ -1,0 +1,78 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="ui breadcrumb">
+    <div class="active section">Projects</div>
+</div>
+
+<div class="ui right floated small labeled icon button">
+    <i class="plus icon"></i><?php echo $this->tag->linkTo(["projects/new", "Create Project"]) ?>
+</div>
+
+<!-- <div class="page-header" style="margin-top: 10px;">
+    <h1>
+        Projects
+    </h1>    
+</div> -->
+
+<!-- <div class="ui right floated">
+    <i class="plus icon blue"></i><?php echo $this->tag->linkTo(["projects/new", "Create Project"]) ?>
+</div> -->
+
+<?php echo $this->getContent() ?>
+
+<div class="ui raised segment">
+
+    <a class="ui blue ribbon label">Search Projects</a>
+
+    <?php
+        echo $this->tag->form(
+            [
+                "projects/search",
+                "autocomplete" => "off",
+                "class" => "ui form"
+            ]
+        );
+    ?>
+
+    <div class="field">
+        <label for="fieldId">Id</label>
+        <?php echo $this->tag->textField(["id", "type" => "number", "id" => "fieldId", "autofocus" => "true"]) ?>
+    </div>
+
+    <div class="field">
+        <label for="fieldName">Name</label>
+        <?php echo $this->tag->textField(["name", "size" => 30, "id" => "fieldName"]) ?>
+    </div>
+
+    <div class="field">
+        <label for="fieldDescription">Description</label>
+        <?php echo $this->tag->textArea(["description", "cols" => 30, "rows" => 4, "id" => "fieldDescription"]) ?>
+    </div>
+
+    <div class="field">
+        <label for="fieldStarts">Starts</label>
+        <?php echo $this->tag->textField(["starts", "size" => 30, "id" => "fieldStarts"]) ?>
+    </div>
+
+    <div class="field">
+        <label for="fieldCreated">Created</label>
+        <?php echo $this->tag->textField(["created", "size" => 30, "id" => "fieldCreated"]) ?>
+    </div>
+
+    <div class="field">
+        <label for="fieldUpdated">Updated</label>
+        <?php echo $this->tag->textField(["updated", "size" => 30, "id" => "fieldUpdated"]) ?>
+    </div>
+
+    <?php echo $this->tag->submitButton(["Search", "class" => "ui primary button"]) ?>
+    <?php echo $this->tag->linkTo(["projects", "Reset", "class" => "ui button"]) ?>   
+
+    </div>
+
+</div>
+
+<?php echo $this->tag->endForm(); ?>
